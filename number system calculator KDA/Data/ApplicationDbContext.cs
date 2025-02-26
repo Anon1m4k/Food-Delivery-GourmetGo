@@ -10,10 +10,10 @@ namespace number_system_calculator_KDA.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
         {
-            Database.Migrate();
+            //Database.Migrate();
         }
         public DbSet<Basket> Baskets { get; set; }
-        public DbSet<Menu> Menu { get; set; }
+        public DbSet<Dish> Dishs { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
     }
 }

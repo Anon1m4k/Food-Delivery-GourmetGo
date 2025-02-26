@@ -6,18 +6,18 @@ using static System.Reflection.Metadata.BlobBuilder;
 
 namespace number_system_calculator_KDA.Pages
 {
-    public class MenuModel : PageModel
+    public class DishsModel : PageModel
     {
         private readonly ApplicationDbContext _context;
 
-        public MenuModel(ApplicationDbContext context)
+        public DishsModel(ApplicationDbContext context)
         {
             _context = context;
         }
-        public List<Menu> menu { get; set; }
+        public List<Dish> Dishs { get; set; }
         public void OnGet()
         {
-            menu = _context.Menu.ToList();
+            Dishs = _context.Dishs.ToList();
         }
     }
 }

@@ -12,7 +12,7 @@ using number_system_calculator_KDA.Data;
 namespace number_system_calculator_KDA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250225142532_InitialCreate")]
+    [Migration("20250226061343_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -48,7 +48,7 @@ namespace number_system_calculator_KDA.Migrations
                     b.ToTable("Baskets");
                 });
 
-            modelBuilder.Entity("number_system_calculator_KDA.Model.Menu", b =>
+            modelBuilder.Entity("number_system_calculator_KDA.Model.Dish", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -74,7 +74,7 @@ namespace number_system_calculator_KDA.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Menu");
+                    b.ToTable("Dishs");
                 });
 
             modelBuilder.Entity("number_system_calculator_KDA.Model.UserProfile", b =>

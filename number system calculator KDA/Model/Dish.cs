@@ -2,7 +2,7 @@
 
 namespace number_system_calculator_KDA.Model
 {
-    public class Menu
+    public class Dish
     {
         public int Id { get; set; }
 
