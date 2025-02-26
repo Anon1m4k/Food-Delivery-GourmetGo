@@ -27,7 +27,7 @@ namespace number_system_calculator_KDA.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Menu",
+                name: "Dishs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -39,7 +39,7 @@ namespace number_system_calculator_KDA.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Menu", x => x.Id);
+                    table.PrimaryKey("PK_Dishs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -67,7 +67,7 @@ namespace number_system_calculator_KDA.Migrations
                 name: "Baskets");
 
             migrationBuilder.DropTable(
-                name: "Menu");
+                name: "Dishs");
 
             migrationBuilder.DropTable(
                 name: "UserProfiles");
