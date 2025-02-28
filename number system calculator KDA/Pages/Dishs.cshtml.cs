@@ -19,5 +19,15 @@ namespace number_system_calculator_KDA.Pages
         {
             Dishs = _context.Dishs.ToList();
         }
+        public IActionResult OnPostDelete(int id)
+        {
+            var dish = _context.Dishs.Find(id);
+            if (dish != null)
+            {
+                _context.Dishs.Remove(dish);
+                _context.SaveChanges();
+            }
+            return RedirectToPage();
+        }
     }
 }
