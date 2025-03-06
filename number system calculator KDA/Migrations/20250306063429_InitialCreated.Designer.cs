@@ -12,8 +12,8 @@ using number_system_calculator_KDA.Data;
 namespace number_system_calculator_KDA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250228064538_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250306063429_InitialCreated")]
+    partial class InitialCreated
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,17 +33,21 @@ namespace number_system_calculator_KDA.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("DishId")
+                        .HasColumnType("int");
+
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<float>("Sum")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DishId");
 
                     b.ToTable("Baskets");
                 });
@@ -111,6 +115,17 @@ namespace number_system_calculator_KDA.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserProfiles");
+                });
+
+            modelBuilder.Entity("number_system_calculator_KDA.Model.Basket", b =>
+                {
+                    b.HasOne("number_system_calculator_KDA.Model.Dish", "Dish")
+                        .WithMany()
+                        .HasForeignKey("DishId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Dish");
                 });
 #pragma warning restore 612, 618
         }

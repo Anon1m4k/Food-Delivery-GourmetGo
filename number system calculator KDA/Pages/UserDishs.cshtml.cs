@@ -18,7 +18,9 @@ namespace number_system_calculator_KDA.Pages
             var dish = _context.Dishs.Find(id);
             if (dish != null)
             {
-                
+                Basket bs = new Basket { Dish = dish, Quantity = 1, Price = 10 };
+                _context.Baskets.Add(bs);
+                _context.SaveChanges();
             }
 
             return RedirectToPage();

@@ -6,26 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace number_system_calculator_KDA.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialCreated : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Baskets",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    Quantity = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Baskets", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Dishs",
                 columns: table => new
@@ -58,6 +43,33 @@ namespace number_system_calculator_KDA.Migrations
                 {
                     table.PrimaryKey("PK_UserProfiles", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Baskets",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DishId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    Sum = table.Column<float>(type: "real", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Baskets", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Baskets_Dishs_DishId",
+                        column: x => x.DishId,
+                        principalTable: "Dishs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Baskets_DishId",
+                table: "Baskets",
+                column: "DishId");
         }
 
         /// <inheritdoc />
@@ -67,10 +79,10 @@ namespace number_system_calculator_KDA.Migrations
                 name: "Baskets");
 
             migrationBuilder.DropTable(
-                name: "Dishs");
+                name: "UserProfiles");
 
             migrationBuilder.DropTable(
-                name: "UserProfiles");
+                name: "Dishs");
         }
     }
 }
