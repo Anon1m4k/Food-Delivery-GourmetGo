@@ -1,0 +1,28 @@
+﻿@page
+@model number_system_calculator_KDA.Pages.BasketModel
+@{
+}
+<h2>Basket</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>            
+            <th>Quantity</th>
+            <th>Price</th>
+            <td>Sum</td>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dish in Model.Baskets)
+        {
+            <tr>
+                <td>@dish.Dish.Title</td>
+                <td>@dish.Quantity</td>
+                <td>@dish.Price </td>
+                <td>@dish.Sum</td>
+            </tr>
+        }
+    </tbody>
+</table>
