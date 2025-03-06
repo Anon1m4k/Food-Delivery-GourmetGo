@@ -1,4 +1,38 @@
 ﻿@page
+@using number_system_calculator_KDA.Model
 @model number_system_calculator_KDA.Pages.DishsUserModel
 @{
+	ViewData["Title"] = "Меню";
 }
+
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Состав</th>
+            <th>Грамм</th>
+            <th>Цена</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dish in Model.Dishs)
+        {
+            <tr>
+                <td>@dish.Title</td>
+                <td>@dish.Structure</td>
+                <td>@dish.Gram</td>
+                <td>@dish.Price</td>
+                <td>
+                    <form method="post" asp-page-handler="AddToCart" asp-route-id="@dish.Id" style="display:inline;">
+                        <button type="submit" class="btn btn-primary">Добавить в корзину</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

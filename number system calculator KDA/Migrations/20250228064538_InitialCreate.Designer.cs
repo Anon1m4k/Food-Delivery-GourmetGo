@@ -12,7 +12,7 @@ using number_system_calculator_KDA.Data;
 namespace number_system_calculator_KDA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250226061343_InitialCreate")]
+    [Migration("20250228064538_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
