@@ -15,13 +15,21 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var dish in Model.Baskets)
+        
+
+        for (int i = 0; i < Model.Baskets.Count(); i++)
         {
             <tr>
                 <td>@dish.Dish.Title</td>
-                <td>@dish.Quantity</td>
+                <td> <input asp-for="Baskets[i].Quantity" type="number" min="1" max="100">  </td>
                 <td>@dish.Price </td>
                 <td>@dish.Sum</td>
+
+                <td>                   
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@dish.Id" style="display:inline;">
+                        <button type="submit" class="btn btn-success" onclick="return confirm('Вы уверены что хотите заказать?')">Заказать</button>
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

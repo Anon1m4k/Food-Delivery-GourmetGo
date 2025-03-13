@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using number_system_calculator_KDA.Data;
 using number_system_calculator_KDA.Model;
 
@@ -23,7 +24,7 @@ namespace number_system_calculator_KDA.Pages
             }
             else
             {
-                Dish = new Dish() { Title = "", Structure = "", Gram = 0, Price = 0 };
+                Dish = new Dish() { Title = "", Structure = "", Gram = 0, Price = 0, Sum = 0 };
             }
         }
         public IActionResult OnPost()
