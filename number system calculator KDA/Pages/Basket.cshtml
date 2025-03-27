@@ -3,7 +3,7 @@
 @{
 }
 <h2>Basket</h2>
-
+<body>
 <table class="table">
     <thead>
         <tr>
@@ -19,16 +19,21 @@
         {
         <tr>
             <td>@dish.Dish.Title</td>
-            <td> <input asp-for="@dish.Quantity" type="number" min="1" max="100">  </td>
+            <td><input asp-for="@dish.Quantity" type="number" min="1" max="100"></td>
             <td>@dish.Price </td>
             <td>@dish.Sum</td>
+            <td></td>
 
             <td>
                 <form method="post" asp-page-handler="Delete" asp-route-id="@dish.Id" style="display:inline;">
-                    <button type="submit" class="btn btn-success" onclick="return confirm('Вы уверены что хотите заказать?')">Заказать</button>
+                    <button type="submit" class="btn btn-danger">Удалить</button>
                 </form>
             </td>
         </tr>
         }
     </tbody>
 </table>
+    <form method="post" asp-page-handler="Clear" style="display:inline;">
+        <button type="submit" class="btn btn-success" onclick="return confirm('Вы уверены что хотите заказать?')">Заказать</button>
+    </form>
+</body>

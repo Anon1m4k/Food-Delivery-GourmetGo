@@ -14,19 +14,25 @@ namespace number_system_calculator_KDA.Pages
         }
         public IActionResult OnPostAddToCart(int id)
         {
-            
             var dish = _context.Dishs.Find(id);
             if (dish != null)
             {
-                Basket bs = new Basket { Dish = dish, Quantity = 1, Price = 10 };
-                _context.Baskets.Add(bs);
-                _context.SaveChanges();
+                var basketItem = _context.Baskets.FirstOrDefault(b => b.Dish.Id == id);
+                if (basketItem != null)
+                {
+                    basketItem.Quantity++;
+                    _context.Baskets.Update(basketItem);
+                }
+                else
+                {
+                    Basket bs = new Basket { Dish = dish, Quantity = 1, Price = dish.Price };
+                    _context.Baskets.Add(bs);
+                }
+                _context.SaveChanges(); // Сохраняем изменения в базе данных
             }
-
             return RedirectToPage();
         }
         private readonly ApplicationDbContext _context; 
-
         public DishsUserModel(ApplicationDbContext context)
         {
             _context = context;
