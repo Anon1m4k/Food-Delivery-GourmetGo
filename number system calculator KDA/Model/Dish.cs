@@ -15,5 +15,6 @@ namespace number_system_calculator_KDA.Model
         public required string Structure { get; set; }
         public required int Gram { get; set; }
         public required float Price { get; set; }
-    }
+        public required float Sum { get; set; }
+    }       
 }
