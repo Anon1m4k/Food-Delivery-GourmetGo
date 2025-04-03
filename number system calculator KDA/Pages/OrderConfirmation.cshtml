@@ -1,0 +1,23 @@
+﻿@page
+@model number_system_calculator_KDA.Pages.OrderConfirmationModel
+@{
+	ViewData["Title"] = "Подтверждение заказа";
+}
+<div class="container mt-5">
+    <div class="card shadow text-center">
+        <div class="card-header bg-success text-white">
+            <h3><i class="bi bi-check-circle"></i> Заказ принят</h3>
+        </div>
+        <div class="card-body py-4">
+            <h4 class="card-title">Номер вашего заказа: #@Model.OrderId</h4>
+            <p class="card-text mt-3">Ваш заказ принят, ожидайте звонка от оператора для подтверждения и уточнения деталей.</p>
+            <div class="mt-4">
+               
+                    <div class="form-group">
+                        <a class="btn btn-primary" asp-area="" asp-page="/UserDishs">Вернуться в меню</a>
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
