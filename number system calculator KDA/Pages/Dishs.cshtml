@@ -9,32 +9,23 @@
     <a class="btn btn-primary" href="@Url.Page("Dish", new { id = 0 })">Добавить новое блюдо</a>
 </p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Structure</th>
-            <th>Gram</th>
-            <th>Price</th>    
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var dish in Model.Dishs)
-        {
-            <tr>
-                <td>@dish.Title</td>
-                <td>@dish.Structure</td>
-                <td>@dish.Gram</td>
-                <td>@dish.Price</td>
-
-                <td>
-                    <a asp-page="Dish" asp-route-id="@dish.Id" class="btn btn-success">Изменить</a>                   
-                    <form method="post" asp-page-handler="Delete" asp-route-id="@dish.Id" style="display:inline;">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('Удалить блюдо?')">Удалить</button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    @foreach (var dish in Model.Dishs)
+    {
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">@dish.Title</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@dish.Structure</h6>
+                    <p class="card-text">Грамм: @dish.Gram</p>
+                    <p class="card-text">Цена: @dish.Price</p>
+                   
+                </div>
+                <div class="card-footer d-flex justify-content-between">
+                    <a href="@Url.Page("Dish", new { id = dish.Id })" class="btn btn-warning">Изменить</a>
+                    <a href="javascript:void(0);" class="btn btn-danger" onclick="if (confirm('Are you sure you want to delete?')) { window.location.href = '@Url.Page("DishDelete", new { id = dish.Id })'; }">Удалить</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

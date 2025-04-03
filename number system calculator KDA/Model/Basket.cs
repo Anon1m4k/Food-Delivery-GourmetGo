@@ -53,4 +53,5 @@ namespace number_system_calculator_KDA.Model
         private float price;
 
     }
+
 }

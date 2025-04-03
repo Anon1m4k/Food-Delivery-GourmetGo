@@ -14,6 +14,10 @@ namespace number_system_calculator_KDA.Pages
             _context = context;
         }
         public List<Basket> Baskets { get; set; }
+
+        [BindProperty]  
+        public Basket Basket { get; set; }
+
         public void OnGet()
         {
             Baskets = _context.Baskets.Include(c => c.Dish).ToList();
@@ -35,5 +39,19 @@ namespace number_system_calculator_KDA.Pages
             _context.SaveChanges();
             return RedirectToPage();
         }
+        public IActionResult OnPostOrder()
+        {
+            // Генерация ID заказа
+            var orderId = new Random().Next(100000, 999999).ToString();
+
+            // Очистка корзины
+            var baskets = _context.Baskets.ToList();
+            _context.Baskets.RemoveRange(baskets);
+            _context.SaveChanges();
+
+            // Перенаправление на страницу подтверждения с параметром OrderId
+            return RedirectToPage("/OrderConfirmation", new { OrderId = orderId });
+        }
+
     }
 }
