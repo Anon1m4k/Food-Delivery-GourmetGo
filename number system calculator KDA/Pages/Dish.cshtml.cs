@@ -7,7 +7,7 @@ using number_system_calculator_KDA.Model;
 
 namespace number_system_calculator_KDA.Pages
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class DishModel : PageModel
     {
         private readonly ApplicationDbContext _context;

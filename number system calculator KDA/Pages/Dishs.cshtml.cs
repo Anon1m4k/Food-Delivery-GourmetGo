@@ -8,7 +8,6 @@ using static System.Reflection.Metadata.BlobBuilder;
 
 namespace number_system_calculator_KDA.Pages
 {
-    [Authorize]
     public class DishsModel : PageModel
     {
         private readonly ApplicationDbContext _context;
