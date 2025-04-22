@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using number_system_calculator_KDA.Data;
 using number_system_calculator_KDA.Model;
 using static System.Reflection.Metadata.BlobBuilder;
@@ -17,7 +19,7 @@ namespace number_system_calculator_KDA.Pages
         public List<Dish> Dishs { get; set; }
         public void OnGet()
         {
-            Dishs = _context.Dishs.ToList();
+            Dishs = _context.Dishs.ToList(); 
         }
         public IActionResult OnPostDelete(int id)
         {
