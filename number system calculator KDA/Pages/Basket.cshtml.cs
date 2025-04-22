@@ -21,20 +21,8 @@ namespace number_system_calculator_KDA.Pages
         public void OnGet()
         {
             Baskets = _context.Baskets.Include(c => c.Dish).ToList();
-        }*/
-
-        public void OnGet(int id)
-        {
-            if (id > 0)
-            {
-                Basket = _context.Baskets.FirstOrDefault(b => b.Id == id);
-                //Baskets = _context.Baskets.Include(c => c.Dish).ToList();
-            }
-            else
-            {
-                Basket = new Basket();
-            }
         }
+
         public IActionResult OnPostDelete(int id)
         {
             var basketItem = _context.Baskets.Find(id);
