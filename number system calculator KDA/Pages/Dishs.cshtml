@@ -23,7 +23,9 @@
                 </div>
                 <div class="card-footer d-flex justify-content-between">
                     <a href="@Url.Page("Dish", new { id = dish.Id })" class="btn btn-warning">Изменить</a>
-                    <a href="javascript:void(0);" class="btn btn-danger" onclick="if (confirm('Are you sure you want to delete?')) { window.location.href = '@Url.Page("DishDelete", new { id = dish.Id })'; }">Удалить</a>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@dish.Id" onsubmit="return confirm('Are you sure you want to delete?');">
+                        <button type="submit" class="btn btn-danger">Удалить</button>
+                    </form>
                 </div>
             </div>
         </div>
