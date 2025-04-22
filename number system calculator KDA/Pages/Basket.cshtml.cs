@@ -52,6 +52,22 @@ namespace number_system_calculator_KDA.Pages
             // Перенаправление на страницу подтверждения с параметром OrderId
             return RedirectToPage("/OrderConfirmation", new { OrderId = orderId });
         }
+       
+        public IActionResult OnPostUpdateQuantity(int id, int quantity)
+        {
+            var basketItem = _context.Baskets
+                .Include(b => b.Dish)
+                .FirstOrDefault(b => b.Id == id);
+
+            if (basketItem != null)
+            {
+                basketItem.Quantity = quantity;
+                basketItem.Price = basketItem.Dish.Price; // Обновляем цену
+                _context.SaveChanges();
+            }
+            return RedirectToPage();
+        }
+
 
     }
 }
