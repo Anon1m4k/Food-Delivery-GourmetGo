@@ -34,7 +34,7 @@ namespace number_system_calculator_KDA.Pages.Account
                 return RedirectToPage("/Index");
             }
 
-            ModelState.AddModelError(string.Empty, "???????????? ????? ?(???) ??????");
+            ModelState.AddModelError(string.Empty, "Неверный email или пароль");
             return Page();
         }
 

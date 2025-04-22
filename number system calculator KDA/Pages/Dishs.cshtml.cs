@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using number_system_calculator_KDA.Data;
 using number_system_calculator_KDA.Model;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace number_system_calculator_KDA.Pages
 {

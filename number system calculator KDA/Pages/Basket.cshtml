@@ -10,8 +10,7 @@
             </div>
 
             <div class="card-body">
-                <!-- Если корзина пуста -->
-                @if (!Model.Baskets.Any())
+                @if (Model.Baskets?.Any() != true)
                 {
                     <div class="alert alert-info text-center">
                         Ваша корзина пуста

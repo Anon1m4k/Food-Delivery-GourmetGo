@@ -13,14 +13,28 @@ namespace number_system_calculator_KDA.Pages
         {
             _context = context;
         }
-        public List<Basket> Baskets { get; set; }
+
+        public List<Basket> Baskets { get; set; } = new List<Basket>();
 
         [BindProperty]  
         public Basket Basket { get; set; }
 
-        public void OnGet()
+        /*public void OnGet()
         {
             Baskets = _context.Baskets.Include(c => c.Dish).ToList();
+        }*/
+
+        public void OnGet(int id)
+        {
+            if (id > 0)
+            {
+                Basket = _context.Baskets.FirstOrDefault(b => b.Id == id);
+                //Baskets = _context.Baskets.Include(c => c.Dish).ToList();
+            }
+            else
+            {
+                Basket = new Basket();
+            }
         }
         public IActionResult OnPostDelete(int id)
         {

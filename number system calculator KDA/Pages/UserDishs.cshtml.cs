@@ -7,6 +7,11 @@ namespace number_system_calculator_KDA.Pages
 {
     public class DishsUserModel : PageModel
     {
+        private readonly ApplicationDbContext _context;
+        public DishsUserModel(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         public required List<Dish> Dishs { get; set; }
         public void OnGet()
         {
@@ -31,11 +36,6 @@ namespace number_system_calculator_KDA.Pages
                 _context.SaveChanges(); // Сохраняем изменения в базе данных
             }
             return RedirectToPage();
-        }
-        private readonly ApplicationDbContext _context; 
-        public DishsUserModel(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+        }  
     }
 }
