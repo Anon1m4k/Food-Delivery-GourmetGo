@@ -1,9 +1,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using number_system_calculator_KDA.Data;
 using number_system_calculator_KDA.Model;
+using number_system_calculator_KDA.Hubs;
+using System;
 
 namespace number_system_calculator_KDA.Pages
 {
@@ -11,9 +14,11 @@ namespace number_system_calculator_KDA.Pages
     public class DishModel : PageModel
     {
         private readonly ApplicationDbContext _context;
-        public DishModel(ApplicationDbContext context)
+        private readonly IHubContext<ChatHub> _hubContext;
+        public DishModel(ApplicationDbContext context, IHubContext<ChatHub> hubContext)
         {
             _context = context;
+            _hubContext = hubContext;
         }
 
         [BindProperty]
@@ -29,12 +34,12 @@ namespace number_system_calculator_KDA.Pages
                 Dish = new Dish() { Title = "", Structure = "", Gram = 0, Price = 0, Sum = 0 };
             }
         }
-        public IActionResult OnPost()
+        public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            if (!ModelState.IsValid) return Page();
+
+            string action = Dish.Id == 0 ? "add" : "update";
+
             if (Dish.Id == 0)
             {
                 _context.Dishs.Add(Dish);
@@ -43,7 +48,15 @@ namespace number_system_calculator_KDA.Pages
             {
                 _context.Dishs.Update(Dish);
             }
-            _context.SaveChanges();
+
+            await _context.SaveChangesAsync();
+
+            // Если это было добавление нового блюда, Dish.Id теперь будет установлен
+            var savedDish = Dish;
+
+            // Отправляем сообщение перед редиректом
+            await _hubContext.Clients.All.SendAsync("DishChanged", savedDish, action);
+
             return RedirectToPage("Dishs");
         }
     }

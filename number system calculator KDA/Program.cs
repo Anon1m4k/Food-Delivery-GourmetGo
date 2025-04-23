@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using number_system_calculator_KDA.Data;
+using number_system_calculator_KDA.Hubs;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,9 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddHttpContextAccessor();
 
-//Настройка подключения к базе данных 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("FoodDeliveryDb")));
+builder.Services.AddSignalR(options => {
+    options.EnableDetailedErrors = true;
+});
+builder.Services.AddSingleton<ChatHub>();
 
 builder.Services.AddAuthentication("Cookies")
     .AddCookie("Cookies", options =>
@@ -31,6 +35,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.MapHub<ChatHub>("/chatHub");
 
 app.UseAuthentication();
 

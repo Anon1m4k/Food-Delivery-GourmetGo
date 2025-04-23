@@ -2,13 +2,13 @@
 @using number_system_calculator_KDA.Model
 @model number_system_calculator_KDA.Pages.DishsUserModel
 @{
-	ViewData["Title"] = "Меню";
+    ViewData["Title"] = "Меню";
 }
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
+<div class="row row-cols-1 row-cols-md-3 g-4" id="dishes-container">
     @foreach (var dish in Model.Dishs)
     {
-        <div class="col">
+        <div class="col" id="dish-@dish.Id">
             <div class="card h-100 shadow-sm border-0 overflow-hidden">
                 <div class="card-body d-flex flex-column">
                     <div class="mb-3">
@@ -37,3 +37,62 @@
         </div>
     }
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.0/signalr.min.js"></script>
+<script>
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/chatHub")
+        .build();
+
+    connection.on("DishChanged", function (dish, action) {
+        console.log("Received dish:", dish, "Action:", action);
+
+        const container = document.querySelector(".row.row-cols-1.row-cols-md-3.g-4");
+        if (!container) return;
+
+        const createDishCard = (dish) => {
+            return `
+                <div class="col" id="dish-${dish.id}">
+                    <div class="card h-100 shadow-sm border-0 overflow-hidden">
+                        <div class="card-body d-flex flex-column">
+                            <div class="mb-3">
+                                <h5 class="card-title text-primary fw-bold">${dish.title}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted small">${dish.structure}</h6>
+                            </div>
+                            <div class="mt-auto pt-2">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="d-flex align-items-center text-muted small">
+                                        <i class="fas fa-weight me-2"></i> ${dish.gram} г
+                                    </span>
+                                    <span class="text-success fw-bold fs-4">
+                                        ${dish.price.toLocaleString()} ₽
+                                    </span>
+                                </div>
+                                <form method="post" action="/DishsUser?handler=AddToCart&id=${dish.id}">
+                                    <button type="submit" class="btn btn-primary w-100 py-2">
+                                        <i class="fas fa-cart-plus me-2"></i>Добавить в корзину
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+        };
+
+        const existingCard = document.getElementById("dish-" + dish.id);
+
+        if (action === 'update' && existingCard) {
+            existingCard.outerHTML = createDishCard(dish);
+        }
+        else if (action === 'add') {
+            container.insertAdjacentHTML('afterbegin', createDishCard(dish));
+        }
+        else if (action === 'delete' && existingCard) {
+            existingCard.remove();
+        }
+    });
+
+    connection.start()
+        .then(() => console.log("SignalR connection established"))
+        .catch(err => console.error("SignalR connection error:", err.toString()));
+</script>
