@@ -1,5 +1,7 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.SignalR;
 using number_system_calculator_KDA.Data;
 using number_system_calculator_KDA.Hubs;
@@ -22,7 +24,7 @@ namespace number_system_calculator_KDA.Pages
 
         public void OnGet()
         {
-            Dishs = _context.Dishs.ToList();
+            Dishs = _context.Dishs.ToList(); 
         }
 
         public async Task<IActionResult> OnPostDelete(int id)

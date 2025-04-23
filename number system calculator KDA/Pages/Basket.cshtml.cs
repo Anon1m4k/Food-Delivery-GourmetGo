@@ -22,6 +22,7 @@ namespace number_system_calculator_KDA.Pages
         {
             Baskets = _context.Baskets.Include(c => c.Dish).ToList();
         }
+
         public IActionResult OnPostDelete(int id)
         {
             var basketItem = _context.Baskets.Find(id);

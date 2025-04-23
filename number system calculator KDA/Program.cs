@@ -6,14 +6,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddHttpContextAccessor();
 
-//Настройка подключения к базе данных 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("FoodDeliveryDb")));
 builder.Services.AddSignalR(options => {
     options.EnableDetailedErrors = true;
 });
 builder.Services.AddSingleton<ChatHub>();
+
+builder.Services.AddAuthentication("Cookies")
+    .AddCookie("Cookies", options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+    });
 
 var app = builder.Build();
 
@@ -23,11 +30,15 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error");
 }
 
+app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
 app.UseRouting();
+
 app.MapHub<ChatHub>("/chatHub");
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

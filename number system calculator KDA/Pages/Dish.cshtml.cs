@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.SignalR;
@@ -9,6 +10,7 @@ using System;
 
 namespace number_system_calculator_KDA.Pages
 {
+    [Authorize(Roles = "Admin")]
     public class DishModel : PageModel
     {
         private readonly ApplicationDbContext _context;
