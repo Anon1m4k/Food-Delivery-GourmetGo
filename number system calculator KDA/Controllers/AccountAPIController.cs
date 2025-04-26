@@ -52,14 +52,17 @@ namespace number_system_calculator_KDA.Controllers
         {
             if (ModelState.IsValid)
             {
+                bool isFirstUser = !_context.AuthUsers.Any();
+
                 AuthUser user = _context.AuthUsers.FirstOrDefault(u => u.Email == model.Email);
                 if (user == null)
                 {
+                    var authUser = new AuthUser { Email = model.Email, Password = model.Password, Role = isFirstUser ? "Admin" : "User" };
                     // добавляем пользователя в бд
-                    _context.AuthUsers.Add(new AuthUser { Email = model.Email, Password = model.Password });
+                    _context.AuthUsers.Add(authUser);
                     _context.SaveChangesAsync();
 
-                    Authenticate(model.Email, user.Role); // аутентификация
+                    Authenticate(model.Email, authUser.Role); // аутентификация
 
                     return RedirectToPage("/Index");
                 }
