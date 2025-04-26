@@ -18,7 +18,7 @@ builder.Services.AddSingleton<ChatHub>();
 builder.Services.AddAuthentication("Cookies")
     .AddCookie("Cookies", options =>
     {
-        options.LoginPath = "/Account/Login";
+        options.LoginPath = "/AccountAPI/Login";
         options.AccessDeniedPath = "/Account/AccessDenied";
     });
 
@@ -41,6 +41,10 @@ app.MapHub<ChatHub>("/chatHub");
 app.UseAuthentication();
 
 app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
