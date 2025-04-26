@@ -11,7 +11,7 @@ using number_system_calculator_KDA.Data;
 namespace number_system_calculator_KDA.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250422200856_Test")]
+    [Migration("20250426085357_Test")]
     partial class Test
     {
         /// <inheritdoc />
