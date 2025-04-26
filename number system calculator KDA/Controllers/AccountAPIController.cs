@@ -9,9 +9,9 @@ using number_system_calculator_KDA.Model.Login;
 
 namespace number_system_calculator_KDA.Controllers
 {
-    public class AccountController: Controller
+    public class AccountAPIController: Controller
     {
-        public AccountController(ApplicationDbContext context)
+        public AccountAPIController(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -32,7 +32,7 @@ namespace number_system_calculator_KDA.Controllers
                 AuthUser user = _context.AuthUsers.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
                 if (user != null)
                 {
-                    Authenticate(model.Email); // аутентификация
+                    Authenticate(model.Email, user.Role); // аутентификация
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -59,7 +59,7 @@ namespace number_system_calculator_KDA.Controllers
                     _context.AuthUsers.Add(new AuthUser { Email = model.Email, Password = model.Password });
                     _context.SaveChangesAsync();
 
-                    Authenticate(model.Email); // аутентификация
+                    Authenticate(model.Email, user.Role); // аутентификация
 
                     return RedirectToPage("/Index");
                 }
@@ -69,7 +69,7 @@ namespace number_system_calculator_KDA.Controllers
             return View(model);
         }
 
-        private async Task Authenticate(string userName)
+        /*private async Task Authenticate(string userName)
         {
             // создаем один claim
             var claims = new List<Claim>
@@ -80,6 +80,19 @@ namespace number_system_calculator_KDA.Controllers
             ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
             // установка аутентификационных куки
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(id));
+        }*/
+        private async Task Authenticate(string userName, string role)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, userName),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, role)
+            };
+
+            var identity = new ClaimsIdentity(claims, "ApplicationCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+            var principal = new ClaimsPrincipal(identity);
+
+            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
         }
         public async Task<IActionResult> Logout()
         {

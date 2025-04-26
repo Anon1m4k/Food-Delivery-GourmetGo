@@ -15,6 +15,25 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/number_system_calculator_KDA.styles.css" asp-append-version="true" />
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        .footer {
+            margin-top: auto;
+        }   
+    </style>
 </head>
 <body>
     <header>
@@ -27,9 +46,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Profile">Профиль</a>
-                        </li>
+                    
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Dishs">Блюда</a>
                             
@@ -38,7 +55,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Basket">Корзина</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Конфиденциальность</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/UserDishs">Меню</a>
                         </li>
                         @if (isAdmin)
                         {
@@ -51,10 +68,10 @@
                         @if (!isAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/AccountAPI/Login">Войти</a>
+                                <a class="nav-link text-dark" href="/AccountAPI/Login">Войти</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/Account/Register">Регистрация</a>
+                                <a class="nav-link text-dark" href="/AccountAPI/Register">Регистрация</a>
                             </li>
                         }
                         else
