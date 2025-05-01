@@ -4,52 +4,69 @@
 }
 <body>
     <div class="container mt-4">
-        <div class="card shadow">
+        <div class="card shadow-lg">
             <!-- Заголовок корзины -->
-            <div class="card-header bg-primary text-white">
-                <h4 class="mb-0">Ваша корзина</h4>
+            <div class="card-header bg-gradient-mint text-light">
+                <h4 class="mb-0"><i class="fas fa-shopping-basket me-2"></i>Ваша корзина</h4>
             </div>
 
-            <div class="card-body">
+            <div class="card-body p-0">
                 @if (!Model.Baskets.Any())
                 {
-                    <div class="alert alert-info text-center">
-                        Ваша корзина пуста
+                    <div class="alert alert-mint text-center m-4">
+                        <i class="fas fa-cart-arrow-down fa-2x mb-3"></i>
+                        <p class="h5">Ваша корзина пуста</p>
                     </div>
                 }
                 else
                 {
-                    <div class="list-group">
+                    <div class="list-group list-group-flush">
                         @foreach (var basketItem in Model.Baskets)
                         {
-                            <div class="list-group-item">
-                                <div class="row align-items-center">
-                                    <div class="col-md-3">
-                                        <h5 class="mb-1">@basketItem.Dish.Title</h5>
+                            <div class="list-group-item basket-item py-3">
+                                <div class="row align-items-center g-3">
+                                    <!-- Название блюда -->
+                                    <div class="col-md-4">
+                                        <h5 class="mb-1 text-dark">@basketItem.Dish.Title</h5>
+                                        <small class="text-muted">@basketItem.Dish.Structure</small>
                                     </div>
-                                    <div class="col-md-2">
-                                        <!-- Форма для обновления количества -->
+
+                                    <!-- Количество -->
+                                    <div class="col-md-3">
                                         <form method="post" asp-page-handler="UpdateQuantity">
-                                            <input type="hidden" name="id" value="@basketItem.Id" />
-                                            <input type="number" 
-                                                   name="quantity"
-                                                   value="@basketItem.Quantity"
-                                                   min="1"
-                                                   max="100"
-                                                   class="form-control"
-                                                   onchange="this.form.submit()">
+                                            <div class="input-group">
+                                                <input type="hidden" name="id" value="@basketItem.Id" />
+                                                <input type="number"
+                                                       name="quantity"
+                                                       value="@basketItem.Quantity"
+                                                       min="1"
+                                                       max="100"
+                                                       class="form-control form-control-mint"
+                                                       onchange="this.form.submit()">
+                                                <span class="input-group-text bg-transparent">шт.</span>
+                                            </div>
                                         </form>
                                     </div>
-                                    <div class="col-md-2">
-                                        <span class="text-muted">@basketItem.Price.ToString("C")</span>
+
+                                    <!-- Цена и сумма -->
+                                    <div class="col-md-3">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="text-muted">Цена:</span>
+                                            <span class="fw-bold">@basketItem.Price.ToString("N0") ₽</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-2">
+                                            <span class="text-muted">Сумма:</span>
+                                            <span class="fw-bold text-success">@basketItem.Sum.ToString("N0") ₽</span>
+                                        </div>
                                     </div>
-                                    <div class="col-md-2">
-                                        <strong>@basketItem.Sum.ToString("C")</strong>
-                                    </div>
-                                    <div class="col-md-3 text-end">
+
+                                    <!-- Удаление -->
+                                    <div class="col-md-2 text-end">
                                         <form method="post" asp-page-handler="Delete" asp-route-id="@basketItem.Id">
-                                            <button type="submit" class="btn btn-outline-danger btn-sm">
-                                                <i class="bi bi-trash"></i> Удалить
+                                            <button type="submit"
+                                                    class="btn btn-link text-danger"
+                                                    title="Удалить">
+                                                <i class="fas fa-trash-alt fa-lg"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -58,17 +75,11 @@
                         }
                     </div>
 
-                    <!-- Блок "Итого" -->
-                    <div class="mt-4 p-3 bg-light rounded">
-                        <div class="row">
-                            <div class="col-md-8 text-end">
-                                <h5 class="mb-0">Итого:</h5>
-                            </div>
-                            <div class="col-md-4">
-                                <h4 class="text-primary mb-0">
-                                    @Model.Baskets.Sum(b => b.Sum).ToString("C")
-                                </h4>
-                            </div>
+                    <!-- Итоговая сумма -->
+                    <div class="total-box m-4 p-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Общая сумма:</h5>
+                            <h2 class="mb-0 text-light">@Model.Baskets.Sum(b => b.Sum).ToString("N0") ₽</h2>
                         </div>
                     </div>
                 }
@@ -76,44 +87,36 @@
 
             <!-- Футер с кнопками -->
             <div class="card-footer bg-transparent">
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between align-items-center">
                     @if (Model.Baskets.Any())
                     {
-                        <form method="post" asp-page-handler="Clear">
-                            <button type="submit" class="btn btn-outline-secondary">
-                                <i class="bi bi-x-circle"></i> Очистить корзину
+                        <div class="d-flex gap-3">
+                            <form method="post" asp-page-handler="Clear">
+                                <button type="submit" class="btn btn-outline-mint">
+                                    <i class="fas fa-eraser me-2"></i>Очистить
+                                </button>
+                            </form>
+                            <a href="/UserDishs" class="btn btn-mint-outline">
+                                <i class="fas fa-utensils me-2"></i>Добавить ещё
+                            </a>
+                        </div>
+
+                        <form method="post" asp-page-handler="Order">
+                            <button type="submit" class="btn btn-mint">
+                                <i class="fas fa-check-circle me-2"></i>Оформить заказ
                             </button>
                         </form>
-
-                       <form method="post" asp-page-handler="Order">
-    <button type="submit" class="btn btn-primary">
-        Оформить заказ
-    </button>
-</form>
                     }
                     else
                     {
-                        <a class="btn btn-primary" asp-page="/UserDishs">Вернуться в меню</a>
+                        <a class="btn btn-mint" asp-page="/UserDishs">
+                            <i class="fas fa-arrow-left me-2"></i>Вернуться в меню
+                        </a>
                     }
                 </div>
             </div>
         </div>
     </div>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
-    <style>
-        .basket-item {
-            background: white;
-            border-left: 4px solid var(--mint-300);
-            border-radius: 8px;
-        }
-
-        .total-box {
-            background: linear-gradient(45deg, var(--mint-400), var(--mint-300));
-            color: white;
-            border-radius: 12px;
-        }
-    </style>
 
 </body>
 

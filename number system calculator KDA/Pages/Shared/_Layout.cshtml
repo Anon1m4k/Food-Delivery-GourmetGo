@@ -58,7 +58,6 @@
             --mint: #B6E2D3;
         }
 
-
         h1, h2 {
             font-family: 'Comfortaa', cursive;
             font-weight: 600;
@@ -106,6 +105,14 @@
                 box-shadow: 0 4px 15px rgba(114, 193, 179, 0.4);
             }
 
+        .bg-mint-500 {
+            background-color: var(--mint-500);
+        }
+
+        .text-mint-700 {
+            color: var(--mint-700);
+        }
+
         .card {
             background: var(--fresh-white);
             border: none;
@@ -119,6 +126,10 @@
                 transform: translateY(-5px);
                 box-shadow: 0 8px 20px rgba(162, 228, 184, 0.15);
             }
+
+        .card-header {
+            border-radius: 1rem 1rem 0 0 !important;
+        }
 
         .form-control:focus {
             border-color: var(--mint-300);
@@ -143,9 +154,100 @@
 
         .feature-item {
             text-align: center;
-            max-width: 250px;
+            max-width: 300px;
         }
-  
+
+        .bg-gradient-mint {
+            background: linear-gradient(135deg, var(--mint-primary) 0%, var(--mint-dark) 100%);
+            border-radius: 12px 12px 0 0;
+        }
+
+        .basket-item {
+            border-left: 4px solid var(--mint-200);
+            margin: 8px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+            .basket-item:hover {
+                transform: translateX(5px);
+                box-shadow: 0 4px 12px rgba(158, 227, 209, 0.2);
+            }
+
+        .total-box {
+            background: var(--mint-500);
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(158, 227, 209, 0.3);
+        }
+
+        .btn-mint {
+            background: var(--mint-500);
+            color: var(--text-light);
+            padding: 12px 32px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-mint:hover {
+                background: var(--mint-600);
+                transform: translateY(-2px);
+                box-shadow: 0 4px 15px rgba(114, 193, 179, 0.4);
+            }
+
+        .btn-outline-mint {
+            border: 2px solid var(--mint-400);
+            color: var(--mint-500);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-outline-mint:hover {
+                background: var(--mint-100);
+                border-color: var(--mint-300);
+            }
+
+        .form-control-mint:focus {
+            border-color: var(--mint-300);
+            box-shadow: 0 0 0 3px rgba(158, 227, 209, 0.3);
+        }
+
+        .alert-mint {
+            background-color: var(--mint-100);
+            border-color: var(--mint-200);
+            color: var(--text-dark);
+            border-radius: 12px;
+        }
+
+        .hero-card {
+            background: var(--fresh-white);
+            border: 2px solid var(--mint-200);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .features .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: var(--mint-50);
+        }
+
+            .features .card:hover {
+                transform: translateY(-8px);
+                box-shadow: 0 12px 24px rgba(158, 227, 209, 0.15);
+            }
+
+        .icon-wrapper {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lead {
+            font-size: 1.25rem;
+            color: var(--text-dark);
+        }
+
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -161,28 +263,21 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-
-
                         @if (isAdmin)
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-page="/Dishs">Управление блюдами</a> 
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Account/Profiles">Пользователи</a>
+                            </li>
                         }
-
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Basket">Корзина</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/UserDishs">Меню</a>
-                        </li>
-                        @if (isAdmin)
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-page="/Account/Profiles">Пользователи</a>
-                            </li>
-                        }
-                       
+                        </li>         
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         @if (!isAuthenticated)

@@ -4,19 +4,38 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Здоровое питание с доставкой </h1>
-    <p>Свежие блюда каждый день</p>
-    <a class="btn btn-primary" asp-page="/UserDishs">Выбрать меню</a>
-</div>
-
-<div class="features">
-    <div class="feature-item">
-        <h3>🌿 Свежие продукты</h3>
-        <p>Ежедневное обновление меню</p>
-    </div>
-    <div class="feature-item">
-        <h3>⏱ Быстрая доставка</h3>
-        <p>Привезём за 45 минут</p>
+<div class="container my-5">
+    <section class="text-center py-5">
+        <div class="hero-card bg-white p-5 rounded-4 shadow-lg">
+            <h1 class="display-4 mb-4 fw-bold text-mint-700">Здоровое питание с доставкой</h1>
+            <p class="lead text-muted mb-4">Наслаждайтесь свежими блюдами из экологичных продуктов</p>
+            <a class="btn btn-primary btn-lg px-5 py-3" asp-page="/UserDishs">
+                <i class="fas fa-utensils me-2"></i>Выбрать меню
+            </a>
+        </div>
+    </section>
+    <div class="features row g-4 py-5">
+        <div class="col-md-6">
+            <div class="card h-100 border-0 p-4">
+                <div class="card-body text-center">
+                    <div class="icon-wrapper bg-mint-100 rounded-circle p-4 mb-3 mx-auto">
+                        <i class="fas fa-leaf fa-3x text-mint-600"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3">Свежие продукты</h3>
+                    <p class="text-muted mb-0">Ежедневное обновление меню из сезонных ингредиентов</p>
+                </div>
+            </div>
+        </div>       
+        <div class="col-md-6">
+            <div class="card h-100 border-0 p-4">
+                <div class="card-body text-center">
+                    <div class="icon-wrapper bg-mint-100 rounded-circle p-4 mb-3 mx-auto">
+                        <i class="fas fa-clock fa-3x text-mint-600"></i>
+                    </div>
+                    <h3 class="h4 fw-bold mb-3">Быстрая доставка</h3>
+                    <p class="text-muted mb-0">Привезём заказ в течение 45 минут в любую точку города</p>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
