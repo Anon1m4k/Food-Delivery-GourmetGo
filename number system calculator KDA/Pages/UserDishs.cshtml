@@ -5,14 +5,16 @@
     ViewData["Title"] = "Меню";
 }
 
+
+
 <div class="row row-cols-1 row-cols-md-3 g-4" id="dishes-container">
     @foreach (var dish in Model.Dishs)
     {
         <div class="col" id="dish-@dish.Id">
-            <div class="card h-100 shadow-sm border-0 overflow-hidden">
+            <div class="card h-100">
                 <div class="card-body d-flex flex-column">
                     <div class="mb-3">
-                        <h5 class="card-title text-primary fw-bold">@dish.Title</h5>
+                        <h5 class="card-title">@dish.Title</h5>
                         <h6 class="card-subtitle mb-2 text-muted small">@dish.Structure</h6>
                     </div>
 
@@ -25,7 +27,6 @@
                                 @dish.Price.ToString("N0") ₽
                             </span>
                         </div>
-
                         <form method="post" asp-page-handler="AddToCart" asp-route-id="@dish.Id">
                             <button type="submit" class="btn btn-primary w-100 py-2">
                                 <i class="fas fa-cart-plus me-2"></i>Добавить в корзину

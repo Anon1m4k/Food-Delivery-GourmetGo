@@ -26,22 +26,135 @@
         body {
             display: flex;
             flex-direction: column;
+            background: var(--mint-50);
+            font-family: 'Nunito Sans', sans-serif;
+            color: var(--text-dark);
+            min-height: 100vh;
         }
 
         main {
             flex: 1;
         }
 
-        .footer {
+        :root {
+            --mint-50: #F0FAF7;
+            --mint-100: #D5F5ED;
+            --mint-200: #9FE3D1;
+            --mint-300: #66CFB5;
+            --mint-400: #3DB89A;
+            --mint-500: #209B7D;
+            --mint-600: #178068;
+            --mint-700: #126654;
+            --text-dark: #1A3A32;
+            --text-light: #F8FFFD;
+
+            --mint-primary: #A2E4B8;
+            --mint-dark: #70C1B3;
+            --mint-light: #C0E8D5;
+            --fresh-white: #F5FFFA;
+            --text-dark: #2A4A3C;
+            --accent-coral: #FF7F50;
+
+            --mint: #B6E2D3;
+        }
+
+
+        h1, h2 {
+            font-family: 'Comfortaa', cursive;
+            font-weight: 600;
+            color: var(--mint-dark);
+        }
+
+        a.navbar-brand {
+            font-family: 'Comfortaa', cursive;
+            font-size: 1.5rem;
+            padding: 0.5rem 1rem;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--mint-primary) 0%, var(--mint-dark) 100%);
+            box-shadow: 0 2px 10px rgba(114, 193, 179, 0.2);
+        }
+
+
+        .navbar-brand, .nav-link {
+            color: var(--text-light) !important;
+            transition: opacity 0.3s;
+        }
+
+            .nav-link:hover {
+                opacity: 0.8;
+            }
+
+        .dropdown-menu {
+            border: 1px solid var(--mint-200);
+            box-shadow: 0 8px 24px rgba(26, 58, 50, 0.1);
+        }
+
+        .btn-primary {
+            background: var(--mint-500);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background: var(--mint-600);
+                transform: translateY(-1px);
+
+                box-shadow: 0 4px 15px rgba(114, 193, 179, 0.4);
+            }
+
+        .card {
+            background: var(--fresh-white);
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(158, 227, 209, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid var(--mint-light);
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(162, 228, 184, 0.15);
+            }
+
+        .form-control:focus {
+            border-color: var(--mint-300);
+            box-shadow: 0 0 0 3px rgba(158, 227, 209, 0.3);
+        }
+
+        footer {
+            background: var(--mint);
+            padding: 2rem;
+            text-align: center;
             margin-top: auto;
-        }   
+            width: 100%;
+        }
+
+        .features {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            padding: 3rem 2rem;
+            background: white;
+        }
+
+        .feature-item {
+            text-align: center;
+            max-width: 250px;
+        }
+  
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">Food-Delivery-GourmentGo</a>
+                <a class="navbar-brand" asp-area="" asp-page="/Index">🥗 Food-Delivery-GourmentGo</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -108,11 +221,13 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer>
         <div class="container">
             &copy; 2025 - Food-Delivery-GourmentGo - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <p>С любовью к вашему здоровью</p>
         </div>
     </footer>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
