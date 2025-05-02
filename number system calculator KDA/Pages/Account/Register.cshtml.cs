@@ -40,7 +40,7 @@ namespace number_system_calculator_KDA.Pages.Account
                 return RedirectToPage("/Index");
             }
 
-            ModelState.AddModelError(string.Empty, "Здесь чтото было");
+            ModelState.AddModelError(string.Empty, "Пользователь с таким email уже существует");
             return Page();
         }
 

@@ -5,6 +5,7 @@ namespace number_system_calculator_KDA.Model.AuthApp
     public class RegisterModel
     {
         [Required(ErrorMessage = "Не указан Email")]
+        [EmailAddress(ErrorMessage = "Некорректный формат Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Не указан пароль")]
@@ -12,7 +13,8 @@ namespace number_system_calculator_KDA.Model.AuthApp
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Подтверждение введено неверно")]
+        [Required(ErrorMessage = "Пожалуйста, подтвердите пароль")] 
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
     }
 }
