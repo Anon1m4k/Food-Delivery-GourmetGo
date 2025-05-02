@@ -33,10 +33,15 @@ namespace number_system_calculator_KDA.Pages.Account
                 await Authenticate(Input.Email, user.Role);
                 return RedirectToPage("/Index");
             }
+            else
+            {
+                ModelState.AddModelError(string.Empty, "Неверный email или пароль");
+                return Page();
+            }
+           
 
-            ModelState.AddModelError(string.Empty, "???????????? ????? ?(???) ??????");
-            return Page();
         }
+
 
         private async Task Authenticate(string userName, string role)
         {
