@@ -3,15 +3,18 @@
 @{
 }
 
-<div class="row">
+<div class="row row-cols-1 row-cols-md-3 g-4">
     @foreach (var user in Model.Users)
     {
-        <div class="col-md-4 mb-4">
+        <div class="col">
             <div class="card h-100 shadow-sm">
                 <div class="card-body">
                     <h5 class="card-title">@user.Email</h5>
                     <p class="card-text"><strong>Роль:</strong> @user.Role</p>
-                    <a asp-page="Profile" asp-route-id="@user.Id" class="btn btn-primary">Редактировать</a>
+                    <a asp-page="Profile" asp-route-id="@user.Id"
+                        class="btn btn-primary w-100">
+                        <i class="fas fa-edit me-2"></i>Редактировать
+                    </a>
                 </div>
             </div>
         </div>
