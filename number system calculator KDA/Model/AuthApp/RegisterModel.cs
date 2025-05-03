@@ -12,7 +12,7 @@ namespace number_system_calculator_KDA.Model.AuthApp
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Compare("Password", ErrorMessage = "Подтверждение введено неверно")]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
         public string ConfirmPassword { get; set; }
     }
 }

@@ -9,7 +9,6 @@ namespace number_system_calculator_KDA.Model
         [Required(ErrorMessage = "Требуется название.")]
         public required Dish Dish { get; set; }
        
-
         [Required(ErrorMessage = "Требуется количество.")]
         [Range(0, 100, ErrorMessage = "Количество должно быть между 0 и 100.")]
         public int Quantity
@@ -51,7 +50,5 @@ namespace number_system_calculator_KDA.Model
         private float sum;
         private int quantity;
         private float price;
-
     }
-
 }
