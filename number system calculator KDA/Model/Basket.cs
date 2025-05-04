@@ -1,14 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace number_system_calculator_KDA.Model
 {
     public class Basket
     {
         public int Id { get; set; }
-
         [Required(ErrorMessage = "Требуется название.")]
         public required Dish Dish { get; set; }
-       
+      
         [Required(ErrorMessage = "Требуется количество.")]
         [Range(0, 100, ErrorMessage = "Количество должно быть между 0 и 100.")]
         public int Quantity
@@ -23,6 +23,7 @@ namespace number_system_calculator_KDA.Model
                 sum = quantity * price; // устанавливаем новое значение свойства
             }
         }
+      
         public float Price
         {
             get
@@ -36,6 +37,7 @@ namespace number_system_calculator_KDA.Model
                 // устанавливаем новое значение свойства
             }
         }
+        
         public float Sum
         {
             get
