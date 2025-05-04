@@ -2,11 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Support.UI;
-using System;
 using System.Diagnostics;
-using System.IO;
-using System.Threading;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace E2ETests
 {
@@ -16,8 +12,9 @@ namespace E2ETests
         private static Process _serverProcess;
         private IWebDriver _driver;
         private WebDriverWait _wait;
-        private const string BaseUrl = "http://localhost:5151";
+        private const string BaseUrl = "http://localhost:5000";
         private const string ServerPath = @"D:\Food-Delivery-GourmetGo\number system calculator KDA\bin\Debug\net7.0\number system calculator KDA.exe";
+
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
