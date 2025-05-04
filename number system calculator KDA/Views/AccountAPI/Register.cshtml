@@ -2,8 +2,11 @@
 
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
-<div class="container">
-    <h2 class="text-center">Регистрация</h2>
+<div class="container" style="max-width: 480px;">
+    <div class="card mt-5 border-0">
+        <div class="card-body px-5 py-4">
+
+     <h2 class="text-center">Регистрация</h2>
 
     <form method="post" asp-controller="Account" asp-action="Register" asp-anti-forgery="true" class="mx-auto">
         <div class="validation" asp-validation-summary="ModelOnly"></div>
@@ -26,4 +29,6 @@
             <input type="submit" value="Регистрация" class="btn btn-primary btn-create" />
         </div>
     </form>
+</div>
+</div>
 </div>
